@@ -9,6 +9,13 @@ export default function RaporttiKortti(props) {
         <TbReportAnalytics size={25}/>
         <div>{props.tiedot.tila}</div>
         <div>{props.tiedot.pvm}</div>
+        <button className='errorButton' onClick={deleteReport}>Poista</button>
     </div>
   )
+}
+
+function deleteReport(){
+
+    //Ask if user is sure, dialog etc
+    //firebase query to delete report
 }

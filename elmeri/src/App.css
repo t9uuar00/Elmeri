@@ -1,27 +1,28 @@
 .App {
   text-align: center;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Etusivu{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .Raporttihistoria-container{
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
-
 }
 
-.Raportti-header{
+.Header{
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: rgb(90, 134, 255);
-  height: 50px;
+  height: 80px;
+  width: 100%;
   text-align: center;
   font-size: large;
 }
@@ -34,9 +35,8 @@
   width: auto;
   height: fit-content;
   padding: 1rem;
-
-
 }
+
 .Raporttikortti{
 
   display: flex;
@@ -48,10 +48,28 @@
   height: 50px;
   margin-bottom: 0.2em;
   border-bottom: 2px solid grey;
+  background-color: white;
+}
+
+.Raporttikortti:active{
+
+  background-color: #e8e8e8;
+}
+
+.errorButton{
+  border-style: none;
+  border-radius: 6%;
+  background-color: #cc0000;
+  color: #ececec;
+  padding: 0.4rem;
+  width: 55px;
+}
+
+button{
+  width: 100px;
 }
 
 input{
-
   width: 80%;
   padding: 0.5rem;
   margin-left: 1rem;

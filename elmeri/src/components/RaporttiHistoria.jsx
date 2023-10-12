@@ -8,8 +8,6 @@ export default function RaporttiHistoria() {
     const [isArrowDown, setArrowState] = useState(false) 
     const [textValue, setTextValue] = useState("")
 
-    let ArrowIcon = <AiOutlineArrowDown/>
-
     let testArray = [
     {"id": "abc", "tila": "Hybridilabra", "pvm": "12.10.2023"},
     {"id": "bcd", "tila": "Hybridilabra", "pvm": "10.10.2023"},
@@ -17,7 +15,9 @@ export default function RaporttiHistoria() {
 
   return (
     <div className='Raporttihistoria-container'>
-    <div className='Raportti-header'>Raportit</div>
+    <div className='Raportti-header'>
+        <p>Raportit</p>
+    </div>
     <div className='Raportti-sorting'>
     {isArrowDown ? <AiOutlineArrowDown size={20} onClick={() => setArrowState(!isArrowDown)}/> : <AiOutlineArrowUp size={20} onClick={() => setArrowState(!isArrowDown)}/>}
     <input placeholder='Hae raporttia...' value={textValue} onChange={e => setTextValue(e.target.value)}></input>

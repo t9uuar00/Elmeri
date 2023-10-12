@@ -5,4 +5,4 @@ export default function Etusivu() {
   return (
     <div>Elmerin etusivu</div>
   )
-}
+};

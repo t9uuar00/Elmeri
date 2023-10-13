@@ -7,3 +7,6 @@
   pointer-events: none;
 }
 
+.button {
+  font-size: 100px;
+}

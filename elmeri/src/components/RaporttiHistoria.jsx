@@ -11,11 +11,19 @@ export default function RaporttiHistoria() {
     let testArray = [
     {"id": "abc", "tila": "Hybridilabra", "pvm": "12.10.2023"},
     {"id": "bcd", "tila": "Hybridilabra", "pvm": "10.10.2023"},
+    {"id": "aaa", "tila": "Toinen labra", "pvm": "14.10.2023"},
+    {"id": "abc", "tila": "Hybridilabra", "pvm": "12.10.2023"},
+    {"id": "bcd", "tila": "Hybridilabra", "pvm": "10.10.2023"},
+    {"id": "aaa", "tila": "Toinen labra", "pvm": "14.10.2023"},{"id": "abc", "tila": "Hybridilabra", "pvm": "12.10.2023"},
+    {"id": "bcd", "tila": "Hybridilabra", "pvm": "10.10.2023"},
+    {"id": "aaa", "tila": "Toinen labra", "pvm": "14.10.2023"},
+    {"id": "abc", "tila": "Hybridilabra", "pvm": "12.10.2023"},
+    {"id": "bcd", "tila": "Hybridilabra", "pvm": "10.10.2023"},
     {"id": "aaa", "tila": "Toinen labra", "pvm": "14.10.2023"}]
 
   return (
     <div className='Raporttihistoria-container'>
-    <div className='Raportti-header'>
+    <div className='Header'>
         <p>Raportit</p>
     </div>
     <div className='Raportti-sorting'>
@@ -31,7 +39,7 @@ export default function RaporttiHistoria() {
   )
 }
 
-function sorReportsByDate(isArrowDown){
+function sortReportsByDate(isArrowDown){
 
     //Päivitä reportti itemit päivämäärän mukaan
     if(isArrowDown){

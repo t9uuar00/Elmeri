@@ -5,7 +5,7 @@ import RaporttiHistoria from './components/RaporttiHistoria';
 function App() {
   return (
     <div className="App">
-      <Etusivu/>
+      <RaporttiHistoria/>
     </div>
   );
 }

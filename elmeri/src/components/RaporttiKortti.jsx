@@ -1,6 +1,7 @@
 import React from 'react'
 import '../App.css';
 import { TbReportAnalytics } from "react-icons/tb";
+import Dialogi from './Dialogi';
 
 //Yksittäisen raportin tiedot
 export default function RaporttiKortti(props) {
@@ -9,13 +10,7 @@ export default function RaporttiKortti(props) {
         <TbReportAnalytics size={25}/>
         <div>{props.tiedot.tila}</div>
         <div>{props.tiedot.pvm}</div>
-        <button className='errorButton' onClick={deleteReport}>Poista</button>
+        <Dialogi/>
     </div>
   )
-}
-
-function deleteReport(){
-
-    //Ask if user is sure, dialog etc
-    //firebase query to delete report
 }

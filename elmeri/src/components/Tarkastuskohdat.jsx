@@ -8,6 +8,7 @@ export default function Tarkastuskohdat() {
       <div style={{ textAlign: 'center', marginTop: '50px' }}>
         <h1>Turvallisuusraportti</h1>
         <h2>Havainnoistijat:</h2>
+        <h2>Tila:</h2>
         <PlusMinus></PlusMinus>
       </div>
     </div>

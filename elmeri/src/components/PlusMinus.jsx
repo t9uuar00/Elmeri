@@ -44,19 +44,27 @@ const PlusMinus = () => {
 const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecrement, count, label }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [reason, setReason] = useState('');
+  const [responsibleParty, setResponsibleParty] = useState('');
+  const [kiireellisyys, setKiireellisyys] = useState(null);
+  const kiireellisyysOptions = ['matala', 'normaali', 'kiireellinen'];
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
   const handleTallenna = () => {
-    // Handle saving the reason here (you can use 'reason' state)
-    // Add your logic to handle saving the reason
     console.log('Reason saved:', reason);
+    console.log('Responsible party saved:', responsibleParty);
+    console.log('Kiireellisyys saved:', kiireellisyys);
     setIsDropdownOpen(false);
   };
 
   const handlePeruuta = () => {
+    setIsDropdownOpen(false);
+  };
+
+  const handleKiireellisyysClick = (option) => {
+    setKiireellisyys(option);
     setIsDropdownOpen(false);
   };
 
@@ -87,9 +95,34 @@ const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecremen
             onChange={(e) => setReason(e.target.value)}
             style={{ marginBottom: '10px' }}
           />
+          <input
+            type="text"
+            placeholder="Vastuutaho"
+            value={responsibleParty}
+            onChange={(e) => setResponsibleParty(e.target.value)}
+            style={{ marginBottom: '10px' }}
+          />
+          <div className="dropdown">
+            <button onClick={toggleDropdown} className="dropbtn">
+              {kiireellisyys || 'Kiireellisyys'}
+            </button>
+            {isDropdownOpen && (
+              <div id="myDropdown" className="dropdown-content">
+                {kiireellisyysOptions.map((option, index) => (
+                  <a key={index} onClick={() => handleKiireellisyysClick(option)}>
+                    {option}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-            <button onClick={handlePeruuta}>Peruuta</button>
-            <button onClick={handleTallenna}>Tallenna</button>
+          <button onClick={handlePeruuta} className="button">
+              Peruuta
+            </button>
+            <button onClick={handleTallenna} className="button">
+              Lisää
+            </button>
           </div>
         </div>
       )}
@@ -144,7 +177,7 @@ const ObjectComponent = ({ object, index }) => {
               count={counts[innerIndex]}
               label="Ei kunnossa"
             />
-            <div style={{ margin: '0 10px' }}></div> {/* Spacer between buttons */}
+            <div style={{ margin: '0 10px' }}></div> {}
             <PlusMinusComponent
               index={index}
               innerIndex={innerIndex + object.objs.length}

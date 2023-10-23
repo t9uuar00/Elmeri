@@ -1,5 +1,7 @@
 import './App.css';
 import Etusivu from './components/Etusivu';
+
+ui_saana
 import RaporttiHistoria from './components/RaporttiHistoria';
 
 //test
@@ -20,11 +22,19 @@ const addData = async () => {
     }
 }
 
+import Tarkastuskohdat from './components/Tarkastuskohdat';
+  main
+
 function App() {
   return (
     <div className="App">
+ui_saana
       <button onClick={addData}>Add data</button>
       <RaporttiHistoria/>
+=======
+      <Etusivu></Etusivu>
+      <Tarkastuskohdat></Tarkastuskohdat>
+  main
     </div>
   );
 }

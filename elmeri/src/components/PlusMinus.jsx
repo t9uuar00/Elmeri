@@ -42,30 +42,35 @@ const PlusMinus = () => {
 
 
 const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecrement, count, label }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isKiireellisyysOpen, setIsKiireellisyysOpen] = useState(false);
   const [reason, setReason] = useState('');
   const [responsibleParty, setResponsibleParty] = useState('');
   const [kiireellisyys, setKiireellisyys] = useState(null);
-  const kiireellisyysOptions = ['matala', 'normaali', 'kiireellinen'];
+  const [selectedImage, setSelectedImage] = useState(null);
+  const kiireellisyysOptions = ['Ei kiire', 'Kohtalainen', 'Kiireellinen'];
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const toggleKiireellisyysDropdown = () => {
+    setIsKiireellisyysOpen(!isKiireellisyysOpen);
   };
 
   const handleTallenna = () => {
+    // Sulkee dropdownin kun Kiireellisyys on valittu 
+    if (kiireellisyys) {
+      setIsKiireellisyysOpen(false);
+    }
+    // Tallentaa poikkeaman, vastuutahon ja kiireellisyyden tähän for debugging
     console.log('Reason saved:', reason);
     console.log('Responsible party saved:', responsibleParty);
     console.log('Kiireellisyys saved:', kiireellisyys);
-    setIsDropdownOpen(false);
+    console.log('Selected image:', selectedImage);
   };
 
   const handlePeruuta = () => {
-    setIsDropdownOpen(false);
+    setIsKiireellisyysOpen(false);
   };
-
-  const handleKiireellisyysClick = (option) => {
-    setKiireellisyys(option);
-    setIsDropdownOpen(false);
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
   };
 
   return (
@@ -74,61 +79,71 @@ const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecremen
         <button onClick={() => handleDecrement(innerIndex)} className="button">-</button>
         <span id={`count-${index}-${innerIndex}`}>{count}</span>
         <button
-          onClick={() => {
-            handleIncrement(innerIndex);
-            if (label === 'Ei kunnossa') {
-              toggleDropdown();
-            }
+          onClick={() => { handleIncrement(innerIndex);
+            if (label === 'Ei kunnossa') 
+            { toggleKiireellisyysDropdown(); }
           }}
-          className="button"
-        >
-          +
-        </button>
+          className="button">+</button>
       </div>
       <div className="label">{label}</div>
-      {label === 'Ei kunnossa' && isDropdownOpen && (
+      {label === 'Ei kunnossa' && isKiireellisyysOpen && (
         <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <input
-            type="text"
-            placeholder="Syy"
-            value={reason}
-            onChange={(e) => setReason(e.target.value)}
-            style={{ marginBottom: '10px' }}
-          />
-          <input
-            type="text"
-            placeholder="Vastuutaho"
-            value={responsibleParty}
-            onChange={(e) => setResponsibleParty(e.target.value)}
-            style={{ marginBottom: '10px' }}
-          />
-          <div className="dropdown">
-            <button onClick={toggleDropdown} className="dropbtn">
-              {kiireellisyys || 'Kiireellisyys'}
-            </button>
-            {isDropdownOpen && (
-              <div id="myDropdown" className="dropdown-content">
-                {kiireellisyysOptions.map((option, index) => (
-                  <a key={index} onClick={() => handleKiireellisyysClick(option)}>
-                    {option}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-          <button onClick={handlePeruuta} className="button">
-              Peruuta
-            </button>
-            <button onClick={handleTallenna} className="button">
-              Lisää
-            </button>
-          </div>
         </div>
       )}
+  {isKiireellisyysOpen && (
+    <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ marginBottom: '10px' }}>
+      <input
+        type="text"
+        placeholder="Poikkeama"
+        value={reason}
+        onChange={(e) => setReason(e.target.value)}/>
     </div>
-  );
-};
+    <div style={{ marginBottom: '10px' }}>
+      <input
+        type="text"
+        placeholder="Vastuutaho"
+        value={responsibleParty}
+        onChange={(e) => setResponsibleParty(e.target.value)}/>
+    </div>
+
+<div className="dropdown">
+  <select
+    id="kiireellisyysDropdown"
+    value={kiireellisyys}
+    onChange={(e) => setKiireellisyys(e.target.value)}>
+    <option value="">Valitse kiireellisyys</option>
+    {kiireellisyysOptions.map((option, index) => (
+      <option key={index} value={option}>
+        {option}
+    </option>
+    ))}
+  </select>
+</div>
+
+  <div style={{ marginBottom: '10px', position: 'relative', overflow: 'hidden' }}>
+  <button htmlFor="cameraInput" className="custom-file-upload">
+      Ota kuva
+    </button>
+    <input
+      type="file"
+      accept="image/*"
+      capture="user" // Use "user" to open the front camera, "environment" for the rear camera
+      id="cameraInput"
+      onChange={handleImageChange}
+      style={{ opacity: 0, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}/>
+  </div>
+
+    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+      <button onClick={handlePeruuta} className="button">
+        Peruuta
+      </button>
+      <button onClick={handleTallenna} className="button">
+        Lisää
+      </button>
+    </div>
+  </div>)}
+</div>)};
 
 const ObjectComponent = ({ object, index }) => {
   const [counts, setCounts] = useState(object.objs.map(() => 0));

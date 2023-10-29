@@ -1,6 +1,7 @@
 import './App.css';
 import Etusivu from './components/Etusivu';
 import RaporttiHistoria from './components/RaporttiHistoria';
+import PdfUpload from './components/PdfUpload';
 
 //test
 import { collection, addDoc } from "firebase/firestore";
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={addData}>Add data</button>
-      <RaporttiHistoria/>
+      <PdfUpload/>
     </div>
   );
 }

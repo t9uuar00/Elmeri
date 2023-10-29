@@ -1,6 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,10 +14,16 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//Give out database
-export const firestoreDb = getFirestore(app);
+//Give out database and storage
+const firestoreDb = getFirestore(app);
+const firebaseStorage = getStorage(app);
+//Firabase storage reference
+const storageRef = ref(firebaseStorage, "gs://elmeri-c72f7.appspot.com")
+
+export { firestoreDb, storageRef, getDownloadURL, ref, uploadBytes }

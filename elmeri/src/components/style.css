@@ -1,0 +1,25 @@
+.button {
+    font-size: 14px;
+  }
+  
+  .button-container {
+    display: flex;
+  }
+  
+  .button-label {
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  /* Additional styles for the subText and target */
+  .subText {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .text {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  

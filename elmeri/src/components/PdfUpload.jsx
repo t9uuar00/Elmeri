@@ -10,10 +10,11 @@ export default function PdfUpload() {
     let month = now.getMonth()
     let day = now.getDate()
     let date = `${day}.${month}.${year}`;
-    let fileName = `Elmeri_${date}`
+    let fileName = `Elmeri_${date}_3`
 
     const [selectedFile, setSelectedFile] = useState(null)
-    const [downloadUrl, setDownloadUrl] = useState(null);
+    const [downloadUrl, setDownloadUrl] = useState(null)
+
     const reportRef = ref(storageRef, `/raports/${fileName}`)
     const raportsCollection = collection(firestoreDb, 'raports')
 
@@ -28,7 +29,8 @@ export default function PdfUpload() {
         if (selectedFile) {
             uploadBytes(reportRef, selectedFile).then((snapshot) => {
                 console.log('Uploaded a blob or file!', snapshot);
-                getDownloadURL(reportRef).then((url) => { setDownloadUrl(url); saveFileMetadataToFirestore() })
+                //note to self, handle this better
+                getDownloadURL(reportRef).then((url) => { setDownloadUrl(url); saveFileMetadataToFirestore()})
             });
 
             console.log(downloadUrl)
@@ -59,4 +61,3 @@ export default function PdfUpload() {
         </div>
     )
 }
-

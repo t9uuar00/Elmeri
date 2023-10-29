@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import RaporttiKortti from './RaporttiKortti'
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-import { firebaseDb, storageRef, getDownloadURL } from '../firebase'
+import { firebaseDb, storageRef, getDownloadURL, ref} from '../firebase'
 
 //Sivu, joka näyttää tehdyt raportit
 export default function RaporttiHistoria() {
 
   const [isArrowDown, setArrowState] = useState(false)
   const [textValue, setTextValue] = useState("")
-  const pdfRef = storageRef.bucket;
+  const pdfRef =  ref(storageRef, `/raports/Elmeri_29.9.2023`)
   const [pdfUrl, setPdfUrl] = useState("")
 
 
-  getDownloadURL(storageRef)
+  getDownloadURL(pdfRef)
     .then((url) => {
       const xhr = new XMLHttpRequest();
       xhr.responseType = 'blob';

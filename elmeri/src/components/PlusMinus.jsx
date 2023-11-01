@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CameraCaptureComponent from './CameraCaptureComponent';
 import './style.css';
 
 const PlusMinus = () => {
@@ -46,7 +47,6 @@ const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecremen
   const [reason, setReason] = useState('');
   const [responsibleParty, setResponsibleParty] = useState('');
   const [kiireellisyys, setKiireellisyys] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
   const kiireellisyysOptions = ['Ei kiire', 'Kohtalainen', 'Kiireellinen'];
 
   const toggleKiireellisyysDropdown = () => {
@@ -62,16 +62,12 @@ const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecremen
     console.log('Reason saved:', reason);
     console.log('Responsible party saved:', responsibleParty);
     console.log('Kiireellisyys saved:', kiireellisyys);
-    console.log('Selected image:', selectedImage);
   };
 
   const handlePeruuta = () => {
     setIsKiireellisyysOpen(false);
   };
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(file);
-  };
+
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -121,18 +117,7 @@ const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecremen
   </select>
 </div>
 
-  <div style={{ marginBottom: '10px', position: 'relative', overflow: 'hidden' }}>
-  <button htmlFor="cameraInput" className="custom-file-upload">
-      Ota kuva
-    </button>
-    <input
-      type="file"
-      accept="image/*"
-      capture="user" // Use "user" to open the front camera, "environment" for the rear camera
-      id="cameraInput"
-      onChange={handleImageChange}
-      style={{ opacity: 0, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}/>
-  </div>
+<CameraCaptureComponent></CameraCaptureComponent>
 
     <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
       <button onClick={handlePeruuta} className="button">

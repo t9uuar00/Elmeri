@@ -1,8 +1,14 @@
 import React from "react";
+import '../App.css';
 
-//Type rfc for quick code snippet
 export default function Etusivu() {
   return (
-    <div>Elmerin etusivu</div>
+    <div>
+      <div className="Header">
+        <p>Elmeri – Tarkistuskierrokset</p>
+        </div>
+      <div className ="Etusivu">
+      </div>
+    </div>
   )
 };

@@ -117,7 +117,7 @@ const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecremen
   </select>
 </div>
 
-<CameraCaptureComponent></CameraCaptureComponent>
+<p><CameraCaptureComponent></CameraCaptureComponent></p>
 
     <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
       <button onClick={handlePeruuta} className="button">

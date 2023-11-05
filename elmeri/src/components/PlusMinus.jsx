@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CameraCaptureComponent from './CameraCaptureComponent';
+import Kamera from './Kamera';
 import './style.css';
 
 const PlusMinus = () => {
@@ -117,7 +117,7 @@ const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecremen
   </select>
 </div>
 
-<p><CameraCaptureComponent></CameraCaptureComponent></p>
+<p><Kamera></Kamera></p>
 
     <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
       <button onClick={handlePeruuta} className="button">

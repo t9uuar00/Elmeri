@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const CameraCaptureComponent = () => {
+const Kamera = () => {
   const [photoURL, setPhotoURL] = useState(null);
 
   const videoRef = useRef(null);
@@ -68,4 +68,4 @@ const CameraCaptureComponent = () => {
   )
 }
 
-export default CameraCaptureComponent;
+export default Kamera

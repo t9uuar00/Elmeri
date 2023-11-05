@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
+import {storageRef, ref, deleteObject} from '../firebase'
 
 export default function Dialogi() {
 
@@ -24,7 +25,17 @@ export default function Dialogi() {
 
     const handleFirebaseDelete = () => {
 
+      const fileRef = ref(storageRef, 'raports/Elmeri_29.9.2023');
+
+      deleteObject(fileRef).then(() => {
         console.log("Poistettu tietokannasta");
+
+      })
+      .catch((error) => {
+
+        console.log("Deleting wasn't succesfull. Error: " + error)
+      })
+
 
 
     }

@@ -27,6 +27,7 @@ function App() {
       <RaporttiHistoria />
       <Etusivu></Etusivu>
       <Tarkastuskohdat></Tarkastuskohdat>
+      <PdfUpload/>
     </div>
   );
 }

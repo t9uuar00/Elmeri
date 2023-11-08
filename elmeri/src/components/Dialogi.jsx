@@ -1,48 +1,68 @@
-import React from 'react'
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { useState } from 'react';
-import {storageRef, ref, deleteObject} from '../firebase'
+import React from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
+import {
+  storageRef,
+  ref,
+  deleteObject,
+  doc,
+  deleteDoc,
+  firestoreDb,
+} from "../firebase";
 
-export default function Dialogi() {
+export default function Dialogi({ name, id }) {
+  const [isOpen, setOpen] = useState(false);
+  const filePath = `raports/${name}`;
 
-    const [isOpen, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClickOpen = () => {
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-        setOpen(true)
+  const handleFirebaseDelete = () => {
+    const metadataDocRef = doc(firestoreDb, "raports", id);
 
-    }
+    //Poista tiedoston metatiedot Firestoresta
+    deleteDoc(metadataDocRef)
+      .then(() => {
+        console.log("Tiedoston metatiedot poistettu Firestoresta.");
 
-    const handleClose = () => {
 
-        setOpen(false)
-    }
-
-    const handleFirebaseDelete = () => {
-
-      const fileRef = ref(storageRef, 'raports/Elmeri_29.9.2023');
-
-      deleteObject(fileRef).then(() => {
-        console.log("Poistettu tietokannasta");
-
+        //Poista tiedosto Firebase storagesta
+        const fileRef = ref(storageRef, filePath);
+        deleteObject(fileRef)
+          .then(() => {
+            console.log("Tiedosto poistettu Firebase Storagesta.");
+            window.location.reload(); //Would be better as state transition refresh
+          })
+          .catch((error) => {
+            console.log(
+              "Poisto Firebase Storagesta ei onnistunut. Error: " + error
+            );
+          });
       })
       .catch((error) => {
+        console.error("Dokumentin poisto epäonnistui. Error: ", error);
+      });
 
-        console.log("Deleting wasn't succesfull. Error: " + error)
-      })
-
-
-
-    }
+  };
 
   return (
     <div>
-        <Button className="errorButton" variant="contained" color="error" onClick={handleClickOpen}>
+      <Button
+        className="errorButton"
+        variant="contained"
+        color="error"
+        onClick={handleClickOpen}
+      >
         Poista
       </Button>
       <Dialog
@@ -61,13 +81,17 @@ export default function Dialogi() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Ei</Button>
-          <Button onClick={() => {handleClose(); handleFirebaseDelete()}} autoFocus>
+          <Button
+            onClick={() => {
+              handleClose();
+              handleFirebaseDelete();
+            }}
+            autoFocus
+          >
             Kyllä
           </Button>
         </DialogActions>
       </Dialog>
     </div>
-  )
+  );
 }
-
-

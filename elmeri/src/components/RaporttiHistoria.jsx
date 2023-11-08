@@ -3,9 +3,6 @@ import RaporttiKortti from "./RaporttiKortti";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import {
   firestoreDb,
-  storageRef,
-  getDownloadURL,
-  ref,
   collection,
   getDocs,
 } from "../firebase";
@@ -16,11 +13,10 @@ export default function RaporttiHistoria() {
   const [textValue, setTextValue] = useState("");
   const [pdfUrl, setPdfUrl] = useState("");
   const [raportMetadata, setRaportMetadata] = useState([]);
-  const [fetchedRaportData, setFetchedRaportData] = useState([]);
 
-  //Hae raporttien metadata Firestoresta
+//Hae raporttien Firebase storage metadata Firestoresta
   async function fetchAllRaportMetadata() {
-
+    
     //Firestore raportti kokoelma, jossa metatiedot PDF-tiedostoista
     const raportCollectionRef = collection(firestoreDb, "raports");
 
@@ -38,47 +34,9 @@ export default function RaporttiHistoria() {
     }
   }
 
-  useEffect(() => {fetchAllRaportMetadata()}, []); //Suorittaa itsensä komponentin rakentuessa
-
- /*  async function fetchRaportsFromStorage() {
-    await fetchAllRaportMetadata(); //Hae dokumenttien metadata Firestoresta
-
-    //Lataa PDF-tiedostot
-    raportMetadata.forEach((metadata) => {
-      
-      const pdfRef = ref(storageRef, `/raports/${metadata.name}`);
-
-      getDownloadURL(pdfRef)
-        .then((url) => {
-          const xhr = new XMLHttpRequest();
-          xhr.responseType = "blob";
-          xhr.onload = (event) => {
-            const blob = xhr.response;
-          };
-          xhr.open("GET", url);
-          xhr.send();
-
-          console.log(url);
-          setPdfUrl(url);
-
-          setFetchedRaportData([
-            ...fetchedRaportData,
-            {
-              url: url,
-              name: pdfRef.name,
-            },
-          ]);
-        })
-        .catch((error) => {
-          console.log("error" + error);
-        });
-    });
-  }
-
   useEffect(() => {
-    fetchRaportsFromStorage();
-  }, []);
-*/
+    fetchAllRaportMetadata();
+  }, []); //Suorittaa itsensä komponentin rakentuessa
 
   return (
     <div className="Raporttihistoria-container">
@@ -104,8 +62,8 @@ export default function RaporttiHistoria() {
         ></input>
       </div>
       <div>
-        {raportMetadata.map((raportti) => (
-          <RaporttiKortti tiedot={raportti} key={raportti.url} />
+        {raportMetadata.map((raport) => (
+          <RaporttiKortti raportData={raport} key={raport.url} />
         ))}
       </div>
     </div>

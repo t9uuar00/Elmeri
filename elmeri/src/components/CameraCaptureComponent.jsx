@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const CameraCaptureComponent = () => {
+const Kamera = () => {
   const [photoURL, setPhotoURL] = useState(null);
 
   const videoRef = useRef(null);
@@ -12,7 +12,7 @@ const CameraCaptureComponent = () => {
 
   const handleCapture = () => {
     const context = canvasRef.current.getContext('2d');
-    context.drawImage(videoRef.current, 0, 0, 640, 480);
+    context.drawImage(videoRef.current, 0, 0, 1024, 720);
     setPhotoURL(canvasRef.current.toDataURL('image/png'));
     handleStopCapture();
   };
@@ -61,11 +61,11 @@ const CameraCaptureComponent = () => {
         </> :
         <>
           <video ref={videoRef} />
-          <canvas ref={canvasRef} width={640} height={480} style={{ display: 'none' }} />
+          <canvas ref={canvasRef} width={1024} height={720} style={{ display: 'none' }} />
           <p><button className='border-2 border-primary-blue rounded-lg mx-2 my-1 px-3 py-1 ml-4 hover:scale-110 transition ease-in-out duration-300 hover:bg-primary-blue hover:text-white' onClick={handleCapture}>Ota kuva</button></p>
         </>}
     </div>
   )
 }
 
-export default CameraCaptureComponent;
+export default Kamera;

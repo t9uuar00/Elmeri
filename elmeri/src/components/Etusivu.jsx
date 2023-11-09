@@ -5,7 +5,6 @@ import {IoCreate} from "react-icons/io5"
 import { TbReportAnalytics } from "react-icons/tb";
 import {AiOutlineInfoCircle} from "react-icons/ai"
 
-//Type rfc for quick code snippet
 export default function Etusivu() {
   return (
     <div>

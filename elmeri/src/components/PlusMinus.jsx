@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Kamera from './Kamera';
 import './style.css';
 
 const PlusMinus = () => {
@@ -42,31 +43,31 @@ const PlusMinus = () => {
 
 
 const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecrement, count, label }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isKiireellisyysOpen, setIsKiireellisyysOpen] = useState(false);
   const [reason, setReason] = useState('');
   const [responsibleParty, setResponsibleParty] = useState('');
   const [kiireellisyys, setKiireellisyys] = useState(null);
-  const kiireellisyysOptions = ['matala', 'normaali', 'kiireellinen'];
+  const kiireellisyysOptions = ['Ei kiire', 'Kohtalainen', 'Kiireellinen'];
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const toggleKiireellisyysDropdown = () => {
+    setIsKiireellisyysOpen(!isKiireellisyysOpen);
   };
 
   const handleTallenna = () => {
+    // Sulkee dropdownin kun Kiireellisyys on valittu 
+    if (kiireellisyys) {
+      setIsKiireellisyysOpen(false);
+    }
+    // Tallentaa poikkeaman, vastuutahon ja kiireellisyyden tähän for debugging
     console.log('Reason saved:', reason);
     console.log('Responsible party saved:', responsibleParty);
     console.log('Kiireellisyys saved:', kiireellisyys);
-    setIsDropdownOpen(false);
   };
 
   const handlePeruuta = () => {
-    setIsDropdownOpen(false);
+    setIsKiireellisyysOpen(false);
   };
 
-  const handleKiireellisyysClick = (option) => {
-    setKiireellisyys(option);
-    setIsDropdownOpen(false);
-  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -74,61 +75,60 @@ const PlusMinusComponent = ({ index, innerIndex, handleIncrement, handleDecremen
         <button onClick={() => handleDecrement(innerIndex)} className="button">-</button>
         <span id={`count-${index}-${innerIndex}`}>{count}</span>
         <button
-          onClick={() => {
-            handleIncrement(innerIndex);
-            if (label === 'Ei kunnossa') {
-              toggleDropdown();
-            }
+          onClick={() => { handleIncrement(innerIndex);
+            if (label === 'Ei kunnossa') 
+            { toggleKiireellisyysDropdown(); }
           }}
-          className="button"
-        >
-          +
-        </button>
+          className="button">+</button>
       </div>
       <div className="label">{label}</div>
-      {label === 'Ei kunnossa' && isDropdownOpen && (
+      {label === 'Ei kunnossa' && isKiireellisyysOpen && (
         <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <input
-            type="text"
-            placeholder="Syy"
-            value={reason}
-            onChange={(e) => setReason(e.target.value)}
-            style={{ marginBottom: '10px' }}
-          />
-          <input
-            type="text"
-            placeholder="Vastuutaho"
-            value={responsibleParty}
-            onChange={(e) => setResponsibleParty(e.target.value)}
-            style={{ marginBottom: '10px' }}
-          />
-          <div className="dropdown">
-            <button onClick={toggleDropdown} className="dropbtn">
-              {kiireellisyys || 'Kiireellisyys'}
-            </button>
-            {isDropdownOpen && (
-              <div id="myDropdown" className="dropdown-content">
-                {kiireellisyysOptions.map((option, index) => (
-                  <a key={index} onClick={() => handleKiireellisyysClick(option)}>
-                    {option}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-          <button onClick={handlePeruuta} className="button">
-              Peruuta
-            </button>
-            <button onClick={handleTallenna} className="button">
-              Lisää
-            </button>
-          </div>
         </div>
       )}
+  {isKiireellisyysOpen && (
+    <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ marginBottom: '10px' }}>
+      <input
+        type="text"
+        placeholder="Poikkeama"
+        value={reason}
+        onChange={(e) => setReason(e.target.value)}/>
     </div>
-  );
-};
+    <div style={{ marginBottom: '10px' }}>
+      <input
+        type="text"
+        placeholder="Vastuutaho"
+        value={responsibleParty}
+        onChange={(e) => setResponsibleParty(e.target.value)}/>
+    </div>
+
+<div className="dropdown">
+  <select
+    id="kiireellisyysDropdown"
+    value={kiireellisyys}
+    onChange={(e) => setKiireellisyys(e.target.value)}>
+    <option value="">Valitse kiireellisyys</option>
+    {kiireellisyysOptions.map((option, index) => (
+      <option key={index} value={option}>
+        {option}
+    </option>
+    ))}
+  </select>
+</div>
+
+<p><Kamera></Kamera></p>
+
+    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+      <button onClick={handlePeruuta} className="button">
+        Peruuta
+      </button>
+      <button onClick={handleTallenna} className="button">
+        Lisää
+      </button>
+    </div>
+  </div>)}
+</div>)};
 
 const ObjectComponent = ({ object, index }) => {
   const [counts, setCounts] = useState(object.objs.map(() => 0));

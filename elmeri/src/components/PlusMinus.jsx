@@ -4,8 +4,11 @@ import Dropdown2 from './Dropdown2';
 import ItemsList from './ItemsList';
 import { addRoom, addTargets } from './Handleinputs';
 import CompletedTargets from './CompletedTargets';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
-// raporttikomponentti
+// raportti
 const PlusMinus = () => {
 
   const [laborators, setLaborators] = useState([{ value: '5A102', label: '5A102' },
@@ -37,7 +40,7 @@ const PlusMinus = () => {
   const [targetQuantity, setTargetQuantity] = useState(0);
   const [setOpenModal] = useState(false)
 
-  // asettaa nykyisen päivämäärän reaporttiin
+  // asettaa nykyisen päivämäärän raporttiin
   const setDate = () => {
     let newDate = new Date()
     let date = newDate.getDate();
@@ -147,10 +150,10 @@ const PlusMinus = () => {
             {nextRoomText()}
             <Dropdown2 list = {laborators} ref={childStateRef} />
           </div>
-          <button className="my-2 px-5 py-1 bg-primary-blue text-white rounded-lg hover:scale-110 transition ease-in-out duration-300 text-xl" onClick={() => getChildState()}>Valitse</button></div> :
+          <p><Button variant="contained" onClick={() => getChildState()}>Valitse</Button></p></div> :
           <div className='pt-10'>
             <p className='mb-4 text-lg'>Kaikki tilat suoritettu</p>
-            <button onClick={() => {reportReady()}} className="my-2 px-5 py-1 bg-primary-blue text-white rounded-lg hover:scale-110 transition ease-in-out duration-300 text-xl">Raportti valmis</button>  
+            <Button variant="contained" disableElevation onClick={() => {reportReady()}}>Raportti valmis</Button>
           </div>}
         </div> :
         <CompletedTargets />}
@@ -183,24 +186,32 @@ const PlusMinus = () => {
           {(lab || completedLabs.length > 0) ?
             <p><b>Havainnoitsijat: {mapObservers()}</b></p> :
             <div>
-            <input
-            type="text"
-            className="px-1 py-1 border border-black rounded-lg"
-            value={observer}
-            placeholder="Etunimi Sukunimi"
-            onChange={(event) => setObserver(event.target.value)}
-            autoFocus
-            ref={inputRef}
-            />
-            <button className="my-2 ml-2 px-3 py-1 bg-primary-blue text-white rounded-lg hover:scale-110 transition ease-in-out duration-300 text-lg"  onClick={() => addObserver()}>Lisää</button>
+           <Box
+  component="form"
+  sx={{
+    '& > :not(style)': { m: 1, width: '25ch' },
+  }}
+  noValidate
+  autoComplete="off"
+>
+  <TextField
+    id="outlined-basic"
+    variant="outlined"
+    value={observer}
+    onChange={(event) => setObserver(event.target.value)}
+    placeholder="Etunimi Sukunimi"
+    autoFocus
+    inputRef={inputRef} // ref attribute is passed as inputRef in Material-UI TextField
+  />
+</Box>
+             <Button variant="outlined" size="small" onClick={() => addObserver()}>Lisää</Button>
           {(observers.length > 0) ? <p className='max-w-2/3'>Havainnoitsijat: {mapObservers()}</p> :
           <p className='max-w-2/3 invisible'>Havainnoitsijat: {mapObservers()}</p>}
           </div>}
         </div> 
         {(lab) ? LabChosen() : ChooseLab()}
-      </div>
+      </div>    
     </div>
   )
 }
-
 export default PlusMinus;

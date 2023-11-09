@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Fault from './Fault';
 import Faultslist from './Faultslist';
 import { addItems, deleteFault, setOkCount, getFaults } from './Handleinputs';
+import Button from '@mui/material/Button';
 
 const ItemsList = ({objects}) => {
 
@@ -89,11 +90,11 @@ const ItemsList = ({objects}) => {
   // laskuri kunnossa/ei kunnossa kohdille
   const Counter = ({ value, incrementCount, decrementCount }) => {
     return (
-      <div className='mx-4 space-x-2'>
+      <div className='outlined'>
         {(value > 0) ? 
-          <button className='bg-light-blue/80 hover:bg-bright-blue text-gray-800 font-bold py-2 px-4 rounded-lg' onClick={decrementCount}>
+          <Button variant="outlined" onClick={decrementCount}>
             -
-          </button> :
+          </Button> :
           <button className='px-4 py-2 font-bold invisible'>-</button>}
         <span>{value}</span>
         <button className='bg-light-blue/80 hover:bg-bright-blue text-gray-800 font-bold py-2 px-4 rounded-lg' onClick={incrementCount}>

@@ -12,7 +12,7 @@ export default function Tarkastuskohdat() {
         <div class="tooltip">Tips
           <span class="tooltiptext">Älä täytä väärin</span>
         </div>
-            
+
       </div>
     </div>
   )

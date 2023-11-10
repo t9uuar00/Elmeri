@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RaporttiKortti from "./RaporttiKortti";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-import {
-  firestoreDb,
-  collection,
-  getDocs,
-} from "../firebase";
+import { firestoreDb, collection, getDocs } from "../firebase";
 
 //Sivu, joka näyttää tehdyt raportit
 export default function RaporttiHistoria() {
@@ -14,9 +10,8 @@ export default function RaporttiHistoria() {
   const [pdfUrl, setPdfUrl] = useState("");
   const [raportMetadata, setRaportMetadata] = useState([]);
 
-//Hae raporttien Firebase storage metadata Firestoresta
+  //Hae raporttien Firebase storage metadata Firestoresta
   async function fetchAllRaportMetadata() {
-    
     //Firestore raportti kokoelma, jossa metatiedot PDF-tiedostoista
     const raportCollectionRef = collection(firestoreDb, "raports");
 

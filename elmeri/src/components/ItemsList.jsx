@@ -95,11 +95,11 @@ const ItemsList = ({objects}) => {
           <Button variant="outlined" onClick={decrementCount}>
             -
           </Button> :
-          <button className='px-4 py-2 font-bold invisible'>-</button>}
-        <span>{value}</span>
-        <button className='bg-light-blue/80 hover:bg-bright-blue text-gray-800 font-bold py-2 px-4 rounded-lg' onClick={incrementCount}>
+          <Button variant="outlined" size="small">-</Button>}
+        <h4><span>{value}</span></h4>
+        <Button variant="outlined" size="small" onClick={incrementCount}>
           +
-        </button>
+        </Button>
       </div>
     )
   }

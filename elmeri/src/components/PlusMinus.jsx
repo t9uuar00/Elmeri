@@ -172,7 +172,7 @@ const PlusMinus = () => {
         <p><b>Tarkastelukohde: <span className='font-bold font-md'>{targets.target}</span></b></p>
         {addTargets({target: targets.target})}
         <ItemsList objects= {targets.obs} />
-        <button className="my-2 px-3 py-1 bg-primary-blue text-white rounded-lg hover:scale-110 transition ease-in-out duration-300 text-lg" onClick={() => nextPressed()}>{NextButtonLabel()}</button>
+        <p><Button variant="contained" onClick={() => nextPressed()}>{NextButtonLabel()}</Button></p>
       </div>
     )
   }
@@ -201,7 +201,7 @@ const PlusMinus = () => {
     onChange={(event) => setObserver(event.target.value)}
     placeholder="Etunimi Sukunimi"
     autoFocus
-    inputRef={inputRef} // ref attribute is passed as inputRef in Material-UI TextField
+    inputRef={inputRef}
   />
 </Box>
              <Button variant="outlined" size="small" onClick={() => addObserver()}>Lisää</Button>

@@ -187,23 +187,19 @@ const PlusMinus = () => {
             <p><b>Havainnoitsijat: {mapObservers()}</b></p> :
             <div>
            <Box
-  component="form"
-  sx={{
-    '& > :not(style)': { m: 1, width: '25ch' },
-  }}
-  noValidate
-  autoComplete="off"
->
-  <TextField
-    id="outlined-basic"
-    variant="outlined"
-    value={observer}
-    onChange={(event) => setObserver(event.target.value)}
-    placeholder="Etunimi Sukunimi"
-    autoFocus
-    inputRef={inputRef}
-  />
-</Box>
+              component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
+              noValidate
+              autoComplete="off">
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              value={observer}
+              onChange={(event) => setObserver(event.target.value)}
+              placeholder="Etunimi Sukunimi"
+              autoFocus
+              inputRef={inputRef}
+            />
+          </Box>
              <Button variant="outlined" size="small" onClick={() => addObserver()}>Lisää</Button>
           {(observers.length > 0) ? <p className='max-w-2/3'>Havainnoitsijat: {mapObservers()}</p> :
           <p className='max-w-2/3 invisible'>Havainnoitsijat: {mapObservers()}</p>}

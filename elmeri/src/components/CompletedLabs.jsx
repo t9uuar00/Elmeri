@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import CompletedItems from './CompletedItems'
+import Button from '@mui/material/Button';
 
 const CompletedLabs = ({completed}) => {
 
@@ -21,9 +22,9 @@ const CompletedLabs = ({completed}) => {
 
   const setCompletedList = () => {
     completedLabs.forEach((item, index) => {completedList.push( 
-      <button className='border-b-2 border-t-2 hover:bg-primary-blue hover:scale-125 hover:text-white px-8 py-1 text-lg transition ease-out duration-150' key={item} onClick={() => {handleClick(index)}}>
+      <Button variant="outlined"> {() => {handleClick(index)}}
         <p>{item}</p>
-      </button>
+      </Button>
     )})
     return completedList
   }

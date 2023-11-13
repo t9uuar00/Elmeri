@@ -4,6 +4,7 @@ import Faultslist from './Faultslist';
 import { addItems, deleteFault, setOkCount, getFaults } from './Handleinputs';
 import Button from '@mui/material/Button';
 
+
 const ItemsList = ({objects}) => {
 
   const [obsArray, setObsArray] = useState([]);
@@ -17,7 +18,7 @@ const ItemsList = ({objects}) => {
     })  
     setObsArray(objectList)
     addItems({objectList})
-  }, [objectList, objects])
+  }, [objects])
 
   // kasvattaa kunnossa/ei kunnossa lukumääriä
   // päivittää tilan ja lisää myös datan Handleinputs listaan
@@ -90,7 +91,7 @@ const ItemsList = ({objects}) => {
   // laskuri kunnossa/ei kunnossa kohdille
   const Counter = ({ value, incrementCount, decrementCount }) => {
     return (
-      <div className='outlined'>
+      <div className='mx-4 space-x-2'>
         {(value > 0) ? 
           <Button variant="outlined" onClick={decrementCount}>
             -

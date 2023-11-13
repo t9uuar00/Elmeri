@@ -19,7 +19,7 @@ const formattedDate = `${String(day).padStart(2, '0')}.${String(month).padStart(
       <div>{props.raportData.name}</div>
       <div>{props.raportData.room}</div>
       <div>{formattedDate}</div>
-      <div><a href={props.raportData.url} target="_blank" download>Avaa</a></div>
+      <div><a href={props.raportData.url} target="_blank" download rel="noopener noreferrer">Avaa</a></div>
       <Dialogi name={props.raportData.name} id={props.raportData.id}/>
     </div>
   )

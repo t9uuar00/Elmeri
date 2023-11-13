@@ -4,16 +4,18 @@ import Etusivu from "./components/Etusivu";
 import RaporttiHistoria from "./components/RaporttiHistoria";
 import PdfUpload from "./components/PdfUpload";
 import Tarkastuskohdat from "./components/Tarkastuskohdat";
-import Raportinluonti from './Raportinluonti';
+import Raportinluonti from './components/Raportinluonti';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <RaporttiHistoria />
-      <Etusivu></Etusivu>
-      <Tarkastuskohdat></Tarkastuskohdat>
-      <PdfUpload/>
-    </div>
+  <Routes>
+    <Route path="/" element={<Etusivu/>}></Route>
+    <Route path="/raportit" element={<RaporttiHistoria/>}></Route>
+    <Route path="/tarkastuskohdat" element={<Tarkastuskohdat/>}></Route>
+    <Route path="/" element={<Etusivu/>}></Route>
+    <Route path="/luo_uusi_raportti" element={<Raportinluonti/>}></Route>
+  </Routes>
   );
 }
 

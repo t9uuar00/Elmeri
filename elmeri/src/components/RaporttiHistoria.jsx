@@ -46,10 +46,11 @@ export default function RaporttiHistoria() {
     }
   }
 
+  //Suorittaa itsensä komponentin rakentuessa
   useEffect(() => {
     fetchReportsByDate();
 
-  }, []); //Suorittaa itsensä komponentin rakentuessa
+  }, [isArrowDown]); //Jos isArrowDown-state vaihtuu, kutsu uudelleen
 
   return (
     <div className="Raporttihistoria-container">

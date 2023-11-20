@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, deleteDoc, setDoc, Timestamp} from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, deleteDoc, setDoc, Timestamp, query, orderBy} from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes, deleteObject} from 'firebase/storage'
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,4 +25,4 @@ const firebaseStorage = getStorage(app);
 //Firabase storage reference
 const storageRef = ref(firebaseStorage, "gs://elmeri-c72f7.appspot.com")
 
-export { firestoreDb, storageRef, collection, getDocs, getDownloadURL, ref, uploadBytes, deleteObject, doc, deleteDoc, setDoc, Timestamp}
+export { firestoreDb, storageRef, collection, getDocs, query, orderBy, getDownloadURL, ref, uploadBytes, deleteObject, doc, deleteDoc, setDoc, Timestamp}

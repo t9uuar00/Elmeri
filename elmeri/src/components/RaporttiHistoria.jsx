@@ -1,36 +1,54 @@
 import React, { useState, useEffect } from "react";
 import RaporttiKortti from "./RaporttiKortti";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-import { firestoreDb, collection, getDocs } from "../firebase";
+import { firestoreDb, collection, getDocs, query, orderBy } from "../firebase";
 
 //Sivu, joka näyttää tehdyt raportit
 export default function RaporttiHistoria() {
-  const [isArrowDown, setArrowState] = useState(false);
+  const [isArrowDown, setArrowState] = useState(true);
   const [textValue, setTextValue] = useState("");
-  const [pdfUrl, setPdfUrl] = useState("");
   const [raportMetadata, setRaportMetadata] = useState([]);
 
-  //Hae raporttien Firebase storage metadata Firestoresta
-  async function fetchAllRaportMetadata() {
+   //Hae raporttien Firebase storage metadata Firestoresta päivämäärällä lajiteltuna
+  async function fetchReportsByDate() {
     //Firestore raportti kokoelma, jossa metatiedot PDF-tiedostoista
     const raportCollectionRef = collection(firestoreDb, "raports");
 
-    try {
-      const raportMetadataSnapshot = await getDocs(raportCollectionRef); //Hae dokumentit Firestoresta "Raports"-kokoelmasta
-      const newRaportMetadata = [];
+    if (isArrowDown) {
+      try {
+        const raportMetadataSnapshot = await getDocs(
+          query(raportCollectionRef, orderBy("date_created", "desc")) // Lajittelu uusimmasta vanhimpaan Raports-kokoelmasta
+        );
 
-      raportMetadataSnapshot.forEach((raport) => {
-        newRaportMetadata.push(raport.data()); //Lisää dokumentti-objektit väliaikaseen jonoon
-      });
+        //Jono haettuja raporttiobjekteja
+        const newRaportMetadata = raportMetadataSnapshot.docs.map((doc) =>
+          doc.data()
+        );
+        //Päivitä raportMetaData state -jono raporttien metadatalla
+        setRaportMetadata(newRaportMetadata);
+      } catch (error) {
+        console.log("Firestore-dokumenttien haku ei onnistunut. Error: ", error);
+      }
+    } else {
+      try {
+        const raportMetadataSnapshot = await getDocs(
+          query(raportCollectionRef, orderBy("date_created", "asc")) // Lajittelu vanhimmasta uusimpaan Raports-kokoelmasta
+        );
 
-      setRaportMetadata(newRaportMetadata); //Päivitä state array dokumenttien metadatalla
-    } catch (error) {
-      console.log("Error fetching documents: ", error);
+        const newRaportMetadata = raportMetadataSnapshot.docs.map((doc) =>
+          doc.data()
+        );
+
+        setRaportMetadata(newRaportMetadata);
+      } catch (error) {
+        console.log("Firestore-dokumenttien haku ei onnistunut. Error: ", error);
+      }
     }
   }
 
   useEffect(() => {
-    fetchAllRaportMetadata();
+    fetchReportsByDate();
+
   }, []); //Suorittaa itsensä komponentin rakentuessa
 
   return (
@@ -63,13 +81,4 @@ export default function RaporttiHistoria() {
       </div>
     </div>
   );
-}
-
-function sortReportsByDate(isArrowDown) {
-  //Päivitä reportti itemit päivämäärän mukaan
-  if (isArrowDown) {
-    //Firestore query newest first(?) Tai lajittelu täällä
-  } else {
-    //Firestore query oldest first(?)
-  }
 }

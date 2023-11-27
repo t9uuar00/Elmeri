@@ -1,5 +1,5 @@
 /* global firestore */
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react';
 import CompletedLabs from './CompletedLabs';
 import Dropdown2 from './Dropdown2';
 import ItemsList from './ItemsList';
@@ -7,6 +7,7 @@ import { addRoom, addTargets } from './Handleinputs';
 import CompletedTargets from './CompletedTargets';
 import 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc } from 'firebase/firestore'; // Import Firestore functions
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -44,7 +45,7 @@ const PlusMinus = () => {
   const childStateRef = useRef();
   const inputRef = useRef();
   const [targetQuantity, setTargetQuantity] = useState(0);
-  const [setOpenModal] = useState(false)
+  const [setOpenModal] = useState(false);
 
   // asettaa nykyisen päivämäärän raporttiin
   const setDate = () => {
@@ -116,9 +117,8 @@ const PlusMinus = () => {
   }
 
   const addObserver = () => {
-    // Check if the observer with the same name already exists
     if (observers.some((existingObserver) => existingObserver.name === observer)) {
-      alert('Nimi on jo lisätty!');
+      alert('Nimi on jo lisätty!')
       return;
     }
   
@@ -129,7 +129,7 @@ const PlusMinus = () => {
     setObservers([...observers, newObserver]);
     setObserver('');
     inputRef.current.focus();
-  };
+  }
 
   const mapObservers = () => {
     return observers.map((observer) => (
@@ -141,13 +141,13 @@ const PlusMinus = () => {
         </IconButton>
         </Stack>
       </div>
-    ));
-  };
+    ))
+  }
 
   const removeObserver = (id) => {
     const updatedObservers = observers.filter((observer) => observer.id !== id);
     setObservers(updatedObservers);
-  };
+  }
 
   // asettaa huoneenvalinta-näppäimen tekstin
   const nextRoomText = () => {
@@ -202,32 +202,43 @@ const PlusMinus = () => {
     )
   }
  
-   const addDataToFirestore = () => {
-    const collectionRef = firestore.collection('reports');
+  const firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIRESTORE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  };
 
-    const data = {
-      ready,
-      completedLabs,
-      completedTargets,
-      lab,
-      observers,
-      observer,
-      targetCount,
-      targets,
-    };
+  const app = initializeApp(firebaseConfig);
+  const firestore = getFirestore(app);
 
-    collectionRef
-      .add(data)
-      .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
-      })
-      .catch((error) => {
-        console.error('Error adding document: ', error);
-      });
+  const addDataToFirestore = async () => {
+    try {
+      const collectionRef = collection(firestore, 'reports');
+
+      const data = {
+        ready,
+        completedLabs,
+        completedTargets,
+        lab,
+        observers,
+        observer,
+        targetCount,
+        targets,
+      };
+
+      const docRef = await addDoc(collectionRef, data);
+      console.log('Document written with ID: ', docRef.id);
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
   };
 
   useEffect(() => {
-    if (ready) {
+    if (reportReady) {
       addDataToFirestore();
     }
   }, [ready]);
@@ -266,4 +277,4 @@ const PlusMinus = () => {
     
   )
 }
-export default PlusMinus;
+export default PlusMinus

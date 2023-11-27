@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Raportinluonti.css'; // Import a CSS file for styling
+import './Raportinluonti.css'; 
 
 function Raportinluonti() {
   const [input1, setInput1] = useState('');
@@ -49,7 +49,7 @@ function Raportinluonti() {
   return (
     <div className="raportinluonti-container">
       <h1>Raportin Luonti</h1>
-      <label htmlFor="progress">Progress:</label>
+      <label htmlFor="progress">Edistyminen:</label>
       <progress id="progress" value={progress} max="100" />
       <div className="input-with-dropdown">
         <div>

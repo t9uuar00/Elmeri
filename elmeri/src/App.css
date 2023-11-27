@@ -1,10 +1,86 @@
 .App {
   text-align: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Etusivu{
+  padding: 1rem;
+  height: 200px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
+
+.ui_saana
+.Raporttihistoria-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(90, 134, 255);
+  height: 80px;
+  padding: 1rem;
+  text-align: center;
+  font-size: x-large;
+  color: #fff;
+}
+
+.Raportti-sorting{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: auto;
+  height: fit-content;
+  padding: 1rem;
+}
+
+.Raporttikortti{
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  height: 50px;
+  margin-bottom: 0.2em;
+  border-bottom: 2px solid grey;
+  background-color: white;
+}
+
+.Raporttikortti:active{
+
+  background-color: #e8e8e8;
+}
+
+.errorButton{
+  border-style: none;
+  border-radius: 6%;
+  background-color: #cc0000;
+  color: #ececec;
+  padding: 0.4rem;
+  width: 55px;
+}
+
+button{
+  width: 100px;
+}
+
+input{
+  width: 80%;
+  padding: 0.5rem;
+  margin-left: 1rem;
 }
 
 .button {

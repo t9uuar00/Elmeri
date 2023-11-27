@@ -4,9 +4,14 @@ import Dropdown2 from './Dropdown2';
 import ItemsList from './ItemsList';
 import { addRoom, addTargets } from './Handleinputs';
 import CompletedTargets from './CompletedTargets';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Stack from '@mui/material/Stack';
 
 // raportti
 const PlusMinus = () => {
@@ -110,19 +115,32 @@ const PlusMinus = () => {
   }
 
   const addObserver = () => {
-    setObservers([...observers, observer])
-    setObserver("")
-    inputRef.current.focus()
-  }
+    const newObserver = {
+      id: Date.now(), // or use some unique identifier logic
+      name: observer
+    };
+    setObservers([...observers, newObserver]);
+    setObserver("");
+    inputRef.current.focus();
+  };
 
   const mapObservers = () => {
-    let obsString = ''
-    observers.map((observer, index) => {
-      if (index === 0) {obsString += observer}
-      else {obsString += ", " + observer}
-    })
-    return obsString
-  }
+    return observers.map((observer) => (
+      <div key={observer.id} style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ marginRight: '5px' }}>{observer.name}</div>
+        <Stack direction="row" spacing={1}>
+        <IconButton aria-label="delete" onClick={() => removeObserver(observer.id)}>
+          <DeleteIcon />
+        </IconButton>
+        </Stack>
+      </div>
+    ));
+  };
+
+  const removeObserver = (id) => {
+    const updatedObservers = observers.filter((observer) => observer.id !== id);
+    setObservers(updatedObservers);
+  };
 
   // asettaa huoneenvalinta-näppäimen tekstin
   const nextRoomText = () => {
@@ -208,6 +226,7 @@ const PlusMinus = () => {
         {(lab) ? LabChosen() : ChooseLab()}
       </div>    
     </div>
+    
   )
 }
 export default PlusMinus;

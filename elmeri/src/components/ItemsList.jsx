@@ -97,7 +97,7 @@ const ItemsList = ({objects}) => {
             -
           </Button> :
           <Button variant="outlined" size="small">-</Button>}
-        <h4><span>{value}</span></h4>
+        <span>{value}</span>
         <Button variant="outlined" size="small" onClick={incrementCount}>
           +
         </Button>

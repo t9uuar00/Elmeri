@@ -58,9 +58,12 @@ const RaportSortDropdown = () => {
         <MenuItem value="">
           <em>Ei mitään</em>
         </MenuItem>
-        <MenuItem value="hybridilabra">Hybridilabra</MenuItem>
-        <MenuItem value="labra2">Labra 2</MenuItem>
-        <MenuItem value="labra3">Labra 3</MenuItem>
+        <MenuItem value="hybridilabra">5A101</MenuItem>
+        <MenuItem value="5A102">5A102</MenuItem>
+        <MenuItem value="5A103">5A103</MenuItem>
+        <MenuItem value="5A105">5A105</MenuItem>
+        <MenuItem value="5B103">5B103</MenuItem>
+        <MenuItem value="LVI-tekniikka">LVI-tekniikka</MenuItem>
       </Select>
     </FormControl>
   );

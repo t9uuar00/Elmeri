@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import { addFault, setFaultDataAtIndex } from './Handleinputs';
 import Dropdown2 from './Dropdown2';
 import Kamera from './CameraCaptureComponent';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 const Fault = (props) => {
   const [exception, setException] = useState("");
@@ -79,11 +81,11 @@ const Fault = (props) => {
           <Dropdown2 list={urgencyArray} selected={urgency} ref={childStateRef} />
         </div>
       </div>
-      <button className='border-2 border-primary-blue rounded-lg mx-2 my-1 px-3 py-1 ml-4 hover:scale-110 transition ease-in-out duration-300 hover:bg-primary-blue hover:text-white'  onClick={() => {openCamera()}}>Avaa kamera</button>
+      <Button variant="outlined" size="small"  onClick={() => {openCamera()}}>Avaa kamera</Button>
       {(camIsOpen) && <Kamera />}
       <div className='flex self-center gap-x-10 my-4'>
-        <button className='border-2 border-white bg-oamk-orange rounded-lg mx-2 my-4 px-4 py-1 hover:scale-110 transition ease-in-out duration-300 text-lg' onClick={handleCancel}>Peruuta</button>
-        <button className='border-2 border-white bg-primary-blue text-white rounded-lg mx-2 my-4 px-4 py-1  hover:scale-110 transition ease-in-out duration-300 text-lg' onClick={handleSubmit}>Tallenna</button>
+      <Button variant="outlined" color="error" onClick={handleCancel}>Peruuta</Button>
+      <Button variant="contained" endIcon={<SendIcon />} onClick={handleSubmit}>Tallenna</Button>
       </div>
     </div>
   )

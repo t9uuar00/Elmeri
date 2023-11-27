@@ -1,11 +1,12 @@
-import React, { useState, useRef } from 'react'
+/* global firestore */
+import React, { useState, useRef, useEffect } from 'react'
 import CompletedLabs from './CompletedLabs';
 import Dropdown2 from './Dropdown2';
 import ItemsList from './ItemsList';
 import { addRoom, addTargets } from './Handleinputs';
 import CompletedTargets from './CompletedTargets';
-import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -13,7 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 
-// raportti
+
 const PlusMinus = () => {
 
   const [laborators, setLaborators] = useState([{ value: '5A102', label: '5A102' },
@@ -194,6 +195,36 @@ const PlusMinus = () => {
       </div>
     )
   }
+ 
+   const addDataToFirestore = () => {
+    const collectionRef = firestore.collection('reports');
+
+    const data = {
+      ready,
+      completedLabs,
+      completedTargets,
+      lab,
+      observers,
+      observer,
+      targetCount,
+      targets,
+    };
+
+    collectionRef
+      .add(data)
+      .then((docRef) => {
+        console.log('Document written with ID: ', docRef.id);
+      })
+      .catch((error) => {
+        console.error('Error adding document: ', error);
+      });
+  };
+
+  useEffect(() => {
+    if (ready) {
+      addDataToFirestore();
+    }
+  }, [ready]);
 
   // raportin ylätekstit ja alemmat näkymät sen mukaan onko huone valittu
   return (

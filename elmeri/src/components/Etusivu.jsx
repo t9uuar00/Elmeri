@@ -11,11 +11,13 @@ export default function Etusivu() {
 
   return (
     <div>
+      <div>
       <Header></Header>
+      </div>
       <div className ="Etusivu">
       <Link to="/luo_uusi_raportti">
       <Button variant="outlined" startIcon={<IoCreate/>} style={{ textTransform: "none", padding: "14px 0px" }} >Luo uusi</Button>
-        </Link>
+      </Link>
       <Link to="raportit">
       <Button variant="outlined" startIcon={<TbReportAnalytics/> } style={{ textTransform: "none", padding: "14px 0px" }} >Raportit</Button>
       </Link>

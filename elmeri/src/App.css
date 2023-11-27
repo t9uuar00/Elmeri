@@ -73,7 +73,6 @@
 }
 
 button {
-
   width: 6em;
   min-height: 2em;
   font-size: 1rem;
@@ -101,20 +100,17 @@ button {
   color: #ececec;
 }
 
-.Raportti-sorting input,
-.Raportti-sorting .FormControl {
-  flex: 1;
-  margin-top: 10px;
-}
-
 input{
-  width: 90%;
+  width: 80%;
   padding: 0.5rem;
   font-size: 1rem;
+  margin: 1rem 1rem 0rem 1rem;
+  align-self: center;
 }
 
 .FormControl {
-  width: 100%;
+  width: 96%;
+  margin-top: 0.8rem;
 }
 
 .button {

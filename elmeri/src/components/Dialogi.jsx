@@ -35,7 +35,6 @@ export default function Dialogi({ name, id }) {
       .then(() => {
         console.log("Tiedoston metatiedot poistettu Firestoresta.");
 
-
         //Poista tiedosto Firebase storagesta
         const fileRef = ref(storageRef, filePath);
         deleteObject(fileRef)
@@ -52,7 +51,6 @@ export default function Dialogi({ name, id }) {
       .catch((error) => {
         console.error("Dokumentin poisto epäonnistui. Error: ", error);
       });
-
   };
 
   return (

@@ -8,14 +8,18 @@
 
 .Etusivu{
   padding: 1rem;
-  height: 200px;
   width: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  align-items: center;
 }
 
-.ui_saana
+.Ohjeet{
+
+  height: calc(100vh - 100px);
+  width: 100%;
+}
+
 .Raporttihistoria-container{
   display: flex;
   flex-direction: column;
@@ -26,10 +30,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color: rgb(90, 134, 255);
   height: 80px;
-  padding: 1rem;
+  padding: 1rem 2rem 1rem 2rem;
   text-align: center;
   font-size: x-large;
   color: #fff;
@@ -39,24 +43,50 @@
 
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
   width: auto;
   height: fit-content;
   padding: 1rem;
+  gap: 1rem;
 }
+
 
 .Raporttikortti{
 
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  height: 50px;
-  margin-bottom: 0.2em;
+  padding: 1.5rem 1rem 1.5rem 1rem;
   border-bottom: 2px solid grey;
-  background-color: white;
+}
+
+.Raporttitiedot{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  margin: 0em 1em 0 1em;
+  padding-top: 1em;
+}
+
+button {
+  width: 6em;
+  min-height: 2em;
+  font-size: 1rem;
+}
+
+.Etusivu button{
+
+  width: 20em;
+  margin: 0.8rem;
+}
+
+.Raporttiosat {
+  flex: 1 1 100%;
+  margin-right: 10px; 
 }
 
 .Raporttikortti:active{
@@ -66,23 +96,27 @@
 
 .errorButton{
   border-style: none;
-  border-radius: 6%;
   background-color: #cc0000;
   color: #ececec;
-  padding: 0.4rem;
-  width: 55px;
-}
-
-button{
-  width: 100px;
 }
 
 input{
   width: 80%;
   padding: 0.5rem;
-  margin-left: 1rem;
+  font-size: 1rem;
+  margin: 1rem 1rem 0rem 1rem;
+  align-self: center;
+}
+
+.FormControl {
+  width: 96%;
+  margin-top: 0.8rem;
 }
 
 .button {
   font-size: 100px;
+}
+
+a {
+  text-decoration: none;
 }

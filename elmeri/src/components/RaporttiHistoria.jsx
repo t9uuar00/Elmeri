@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import RaporttiKortti from "./RaporttiKortti";
 import RaportSortDropdown from "./RaportSortDropdown";
-import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineHome} from "react-icons/ai";
-import { Link } from 'react-router-dom';
+import {
+  AiOutlineArrowDown,
+  AiOutlineArrowUp,
+  AiOutlineHome,
+} from "react-icons/ai";
+import { Link } from "react-router-dom";
 import {
   firestoreDb,
   collection,
@@ -17,7 +21,6 @@ export default function RaporttiHistoria() {
   const [isArrowDown, setArrowState] = useState(true);
   const [textValue, setTextValue] = useState("");
   const [raportMetadata, setRaportMetadata] = useState([]);
-
 
   //Etsi raporttia nimeltä (Täysin sama string, sorge)
   async function searchRaports() {
@@ -39,7 +42,7 @@ export default function RaporttiHistoria() {
     } catch (error) {
       console.log("Error fetching documents: ", error);
     }
-  };
+  }
 
   //Hae raporttien Firebase storage metadata Firestoresta päivämäärällä lajiteltuna
   async function fetchReportsByDate() {
@@ -86,8 +89,7 @@ export default function RaporttiHistoria() {
 
   useEffect(() => {
     fetchReportsByDate();
-    if(textValue !== "" || null)
-    searchRaports();
+    if (textValue !== "" || null) searchRaports();
   }, [isArrowDown, textValue]); //Suorittaa itsensä komponentin rakentuessa
 
   return (
@@ -95,9 +97,14 @@ export default function RaporttiHistoria() {
       <div className="Header">
         <p>Raportit</p>
         <Link to="/">
-         <AiOutlineHome size={28} style={{marginTop: '30%'}}/>
+          <AiOutlineHome size={28} style={{ marginTop: "30%" }} />
         </Link>
       </div>
+      <input
+          placeholder="Hae raporttia..."
+          value={textValue}
+          onChange={(e) => setTextValue(e.target.value)}
+        ></input>
       <div className="Raportti-sorting">
         {isArrowDown ? (
           <AiOutlineArrowDown
@@ -110,12 +117,7 @@ export default function RaporttiHistoria() {
             onClick={() => setArrowState(!isArrowDown)}
           />
         )}
-        <input
-          placeholder="Hae raporttia..."
-          value={textValue}
-          onChange={(e) => setTextValue(e.target.value)}
-        ></input>
-        <RaportSortDropdown/>
+        <RaportSortDropdown />
       </div>
       <div>
         {raportMetadata.map((raport) => (

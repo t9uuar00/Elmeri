@@ -12,10 +12,10 @@ export default function PdfUpload() {
   const currentDate = Timestamp.now();
   let now = new Date();
   let year = now.getFullYear();
-  let month = now.getMonth();
+  let month = now.getMonth() + 1;
   let day = now.getDate();
   let date = `${day}.${month}.${year}`;
-  let fileName = `Elmeri_${date}`;
+  let fileName = `elmeri_${date}`;
 
   const [selectedFile, setSelectedFile] = useState(null);
 

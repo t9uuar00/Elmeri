@@ -220,14 +220,12 @@ const PlusMinus = () => {
       const collectionRef = collection(firestore, 'reports');
 
       const data = {
-        ready,
+        observer,
+        laborators,
+        targets,
         completedLabs,
         completedTargets,
-        lab,
-        observers,
-        observer,
         targetCount,
-        targets,
       };
 
       const docRef = await addDoc(collectionRef, data);

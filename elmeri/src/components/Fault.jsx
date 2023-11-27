@@ -81,11 +81,11 @@ const Fault = (props) => {
           <Dropdown2 list={urgencyArray} selected={urgency} ref={childStateRef} />
         </div>
       </div>
-      <Button variant="outlined" size="small"  onClick={() => {openCamera()}}>Avaa kamera</Button>
-      {(camIsOpen) && <Kamera />}
+      <p><Button variant="outlined" size="small"  onClick={() => {openCamera()}}>Avaa kamera</Button>
+      {(camIsOpen) && <Kamera />}</p>
       <div className='flex self-center gap-x-10 my-4'>
       <Button variant="outlined" color="error" onClick={handleCancel}>Peruuta</Button>
-      <Button variant="contained" endIcon={<SendIcon />} onClick={handleSubmit}>Tallenna</Button>
+      <Button variant="outlined" endIcon={<SendIcon />} onClick={handleSubmit}>Tallenna</Button>
       </div>
     </div>
   )

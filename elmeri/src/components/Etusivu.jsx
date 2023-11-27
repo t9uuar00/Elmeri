@@ -11,7 +11,7 @@ export default function Etusivu() {
   return (
     <div>
       <div className="Header">
-        <p>Elmeri – Tarkastuskierrokset</p>
+        <p>Elmeri</p>
       </div>
       <div className="Etusivu">
         <Link to="luo_uusi_raportti">

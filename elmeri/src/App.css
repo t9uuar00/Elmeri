@@ -161,3 +161,8 @@ a {
   visibility: visible;
   opacity: 1;
 }
+
+.mapObservers {
+  .center {
+    text-align: center;}
+}

@@ -1,0 +1,23 @@
+
+
+.tooltip-container {
+  position: absolute; 
+  top: 50%;
+  right: 25%; 
+  transform: translateY(-50%);
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute; 
+  top: 100%;
+  left: 0; 
+  transform: translateX(0); 
+  background-color: #333;
+  color: #ffffff;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0.9;
+  white-space: nowrap;
+}
